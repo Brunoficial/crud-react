@@ -1,11 +1,14 @@
-import Titulo from "./Titulo"
-import Input from "./Input"
+import Titulo from "./Titulo.jsx"
+import Input from "./Input.jsx"
 import adicionar from "../assets/icons/adicionar.svg"
 import { useState } from "react"
 
 function AddProject({ onAddProject }) {
     const [nome, setNome] = useState("")
     const [categoria, setCategoria] = useState("")
+
+    const [categorias, setCategorias] = useState(['Categoria 1', 'Categoria 2'])
+
     return (
         <div className="flex flex-col items-center">
             <Titulo> Criar Projeto </ Titulo>
@@ -14,18 +17,29 @@ function AddProject({ onAddProject }) {
                 <p className="text-cinza-escuro font-bold text-[30px]">Informações do Projeto</p>
 
                 <Input 
+                    type = "text"
                     value = { nome }
                     onChange = {(event) => setNome(event.target.value)} 
                     placeholder = "Nome do Projeto" />
-                <Input  
-                    value = { categoria } 
+
+                <select 
+                    name="Categorias" 
+                    id="" 
                     onChange = {(event) => setCategoria(event.target.value)}
-                    placeholder = "Categoria do Projeto" />
+                    className="flex border-[1px] rounded-[4px] border-cinza w-[300px] h-[40px] px-2 text-laranja">
+                        <option value=""> Nenhuma Categoria </option>
+                    {categorias.map((categoriaNome) => (
+                        <option value = {categoriaNome} > {categoriaNome} </option>
+                    ))}
+                    
+                </select>
 
                 <button 
                     onClick = {() => {
-                        if (!nome.trim() || !categoria.trim()) return alert("Preencha os campos");
+                        if (!nome.trim()) return alert ("Dê um nome ao projeto!!!");
                         onAddProject(nome, categoria);
+                        console.log(nome)
+                        console.log(categoria)
                         setNome("")
                         setCategoria("")
                     }}

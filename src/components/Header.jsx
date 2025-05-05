@@ -1,15 +1,15 @@
 import BotaoHome from "./BotaoHome";
 import user from "../assets/icons/user.svg";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 function Header() {
-
+    const location = useLocation() 
     const navigate = useNavigate() 
 
+    const rotaAtual = location.pathname.replace('/', '')
+
     const onHeaderButtonClick = (event) => {
-        console.log("Clicado")
         const rota = event.target.id;
-        console.log(`Clicou em ${rota}`)
         navigate(`/${rota}`)
     }
 
@@ -20,6 +20,7 @@ function Header() {
                 <BotaoHome 
                     id=""
                     onClick = { onHeaderButtonClick }
+                    className = {rotaAtual === "" ? 'font-bold' : '' } 
                     >
                     Home
                 </BotaoHome>
@@ -27,11 +28,14 @@ function Header() {
                 <BotaoHome 
                     id="projetos"
                     onClick = { onHeaderButtonClick }
+                    className = {rotaAtual === "projetos" ? 'font-bold' : '' } 
                     >
                     Projetos
                 </BotaoHome>
 
-                <BotaoHome>
+                <BotaoHome
+                    className = {rotaAtual === "categorias" ? 'font-bold' : '' } 
+                >
                     Categorias
                 </BotaoHome>
 

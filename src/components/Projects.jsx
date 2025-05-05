@@ -1,8 +1,11 @@
-import Titulo from "./Titulo"
-import seta_baixo_branca from "../assets/icons/seta_baixo_branca.svg"
+import Titulo from "./Titulo.jsx"
 import circulo_laranja from "../assets/icons/circulo_laranja.svg"
+import seta_baixo_branca from "../assets/icons/seta_baixo_branca.svg"
+import { useNavigate } from "react-router-dom";
 
 function Projects( {projects} ) {
+    const navigate = useNavigate()
+    
     return (
         <div className="flex flex-col items-center justify-center">
             <Titulo> Seus Projetos</Titulo>

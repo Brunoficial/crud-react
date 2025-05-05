@@ -3,6 +3,7 @@
 @theme {
     --color-laranja: #D58120;
     --color-cinza: #7E7E7E;
+    --color-cinza-destaque: #484747;
     --color-cinza-escuro: #1E1E1E;
-    --color-verde-ativo: #3DCA30
+    --color-verde-ativo: #3DCA30;
 }
