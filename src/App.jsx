@@ -1,6 +1,7 @@
 import Header from './components/Header.jsx'
 import Propaganda from './components/Propaganda.jsx'
 import CRUD from './components/CRUD.jsx'
+import Footer from './components/Footer.jsx'
 
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
       <Header />
       <Propaganda />
       <CRUD />
+      <Footer />
     </div>
   )
 }

@@ -6,7 +6,7 @@ import { useState } from "react"
 function AddProject({ onAddProject }) {
     const [nome, setNome] = useState("")
     const [categoria, setCategoria] = useState("")
-
+    const [descricao, setDescricao] = useState("")
     const [categorias, setCategorias] = useState(['Categoria 1', 'Categoria 2'])
 
     return (
@@ -31,8 +31,15 @@ function AddProject({ onAddProject }) {
                     {categorias.map((categoriaNome) => (
                         <option value = {categoriaNome} > {categoriaNome} </option>
                     ))}
-                    
                 </select>
+            
+
+                <textarea 
+                    placeholder = "Dê uma descrição ao projeto"
+                    value = { descricao }
+                    onChange = {(event) => setDescricao(event.target.value)}
+                    className="flex border-[1px] rounded-[4px] border-cinza w-[300px] h-[120px] px-2 text-laranja"
+                /> 
 
                 <button 
                     onClick = {() => {

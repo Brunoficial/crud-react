@@ -1,24 +1,20 @@
 import Header from "../components/Header.jsx"
 import AddProject from "../components/AddProject.jsx"
 import Projects from "../components/Projects.jsx"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 function Projetos( ) {
 
-      const [projects, setProjects] = useState([
-          {
-            id: 1,
-            nome: "Nome do Projeto",
-            categoria: "Categoria:teste",
-            ativo: true
-          },  
-        {
-          id: 2,
-          nome: "Nome do Projeto 2",
-          categoria: "Categoria:teste 2",
-          ativo: false
-        }, 
-      ]) 
+    const [projects, setProjects] = useState(
+      JSON.parse(localStorage.getItem("projects"))
+    )
+    
+    useEffect(() => {
+      localStorage.setItem("projects", JSON.stringify(projects));
+      console.log("Projetos foi alterado")
+    }, [projects])
+
+
   
     function onAddProject( nome, categoria ) {
       const newProject = {
@@ -39,4 +35,4 @@ function Projetos( ) {
     )
 }
 
-export default Projetos 
+export default Projetos
