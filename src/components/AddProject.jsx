@@ -1,16 +1,17 @@
 import Titulo from "./Titulo.jsx"
 import Input from "./Input.jsx"
-import adicionar from "../assets/icons/adicionar.svg"
+import adicionar_branco from "../assets/icons/adicionar_branco.svg"
 import { useState } from "react"
+import { toast, Toaster } from "sonner"
 
-function AddProject({ onAddProject }) {
+function AddProject({ onAddProject, categorias }) {
     const [nome, setNome] = useState("")
     const [categoria, setCategoria] = useState("")
     const [descricao, setDescricao] = useState("")
-    const [categorias, setCategorias] = useState(['Categoria 1', 'Categoria 2'])
 
     return (
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center cursor-default">
+            <Toaster richColors/>
             <Titulo> Criar Projeto </ Titulo>
 
             <div className="flex flex-col bg-white items-center justify-center max-w-[885px] mx-auto max-h-[412px] shadow-xl px-[216px] gap-y-[30px] mb-[100px]">
@@ -26,7 +27,7 @@ function AddProject({ onAddProject }) {
                     name="Categorias" 
                     id="" 
                     onChange = {(event) => setCategoria(event.target.value)}
-                    className="flex border-[1px] rounded-[4px] border-cinza w-[300px] h-[40px] px-2 text-laranja">
+                    className="flex  border-[1px] rounded-[4px] border-cinza w-[300px] h-[40px] px-2 text-laranja">
                         <option value=""> Nenhuma Categoria </option>
                     {categorias.map((categoriaNome) => (
                         <option value = {categoriaNome} > {categoriaNome} </option>
@@ -49,9 +50,11 @@ function AddProject({ onAddProject }) {
                         console.log(categoria)
                         setNome("")
                         setCategoria("")
+                        setDescricao("")
+                        toast.success("Projeto criado com sucesso")
                     }}
-                    className = "flex cursor-pointer text-[24px] font-bold text-cinza-escuro gap-[5px] mb-[16px] hover:text-laranja duration-200" >
-                    Adicionar <img src = { adicionar }/>
+                    className = "flex rounded-[12px] px-4 bg-laranja cursor-pointer text-[24px] font-bold text-white gap-[5px] mb-[16px] hover:bg-red-500 duration-200" >
+                    Adicionar <img src = { adicionar_branco }/>
                 </button>
             </div>
 

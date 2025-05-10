@@ -15,7 +15,7 @@ function Header() {
 
     return (
         <header className="flex bg-white h-[120px] mb-[160px] shadow-xl rounded-[30px] px-[54px] mx-auto max-w-[1320px] items-center justify-between">
-            <p className="text-[32px] font-bold text-laranja">BRUNO CRUD</p>
+            <p className="text-[32px] font-bold cursor-default  text-laranja hover:text-red-500 duration-500">BRUNO CRUD</p>
             <div className="flex gap-[50px]">
                 <BotaoHeader 
                     id=""
