@@ -2,15 +2,15 @@ import Titulo from "./Titulo.jsx";
 import circulo_laranja from "../assets/icons/circulo_laranja.svg";
 import seta_baixo_branca from "../assets/icons/seta_baixo_branca.svg";
 import { useNavigate } from "react-router-dom";
-import filter from "../assets/icons/filter.svg";
 import { useState } from "react";
 import BarraPesquisa from "../components/BarraPesquisa.jsx";
+import FiltroAtual from "./filtro/FiltroAtual.jsx";
+import FiltroTipo from "./filtro/FiltroTipo.jsx";
 
-function Projects({ projects, categorias }) {
+function Projects({ projects, categorias, onEstadoClick }) {
   const navigate = useNavigate();
   const [pesquisa, setPesquisa] = useState("");
-  const filtros = ["Categoria", "Ativo/desativo"];
-  const estados = ["Ativo", "Desativo"]
+  const estados = ["Ativo", "Desativo"];
   const [tipoFiltro, setTipoFiltro] = useState("");
   const [filtroAtual, setFiltroAtual] = useState("");
 
@@ -22,42 +22,56 @@ function Projects({ projects, categorias }) {
     navigate(`/projetos/projeto?${query.toString()}`);
   }
 
+  function FiltrarProjetos(projects) {
+    const projetosFiltrados =
+    projects
+      .filter(
+        (project) =>
+          pesquisa === "" ||
+          project.nome
+            .toLowerCase()
+            .trim()
+            .includes(pesquisa.toLowerCase().trim())
+      )
+
+      .filter((project) =>
+        tipoFiltro === "Categoria"
+          ? project.categoria == filtroAtual
+          : project
+      )
+
+      .filter((project) =>
+        filtroAtual === "Ativo" && tipoFiltro === "Ativo/desativo"
+          ? project.ativo
+          : project
+      )
+
+      .filter((project) =>
+        filtroAtual === "Desativo" && tipoFiltro === "Ativo/desativo"
+          ? !project.ativo
+          : project
+      )
+    return projetosFiltrados
+  }
 
   return (
     <div className="flex cursor-default  flex-col items-center justify-center mb-25">
       <Titulo> Seus Projetos</Titulo>
-      <hr className="border-t-3 border-laranja mt-1 mb-4 w-[900px]" />
+      <hr className="border-t-1 border-laranja mt-1 mb-4 w-[900px]" />
       <div className="flex gap-x-[6px]">
         <BarraPesquisa
           value={pesquisa}
           onChange={({ target }) => setPesquisa(target.value)}
         />
         <div className="flex border-[1px] gap-[10px] rounded-[4px] border-cinza w-[314px] h-[40px] px-2 text-laranja">
-          <img src={filter} className="w-[24px]" alt="" />
-          <select
-            onChange={(event) => setTipoFiltro(event.target.value)}
-            className="focus:outline-0"
-          >
-            <option value="">Nenhum Filtro</option>
-            {filtros.map((filtroNome) => (
-              <option value={filtroNome}> {filtroNome} </option>
-            ))}
-          </select>
-          <select
-            className="focus:outline-0"
-            onChange={(event) => setFiltroAtual(event.target.value)}
-          >
-            {tipoFiltro === "Categoria" &&
-              categorias.map((categoriaNome) => (
-                <option value={categoriaNome}> {categoriaNome} </option>
-              ))}
+          <FiltroTipo onChange={(event) => setTipoFiltro(event.target.value)} />
 
-            {tipoFiltro === "Ativo/desativo" &&
-              estados.map((estado) => (
-                <option value = {estado} >{estado}</option>
-              ))
-            }
-          </select>
+          <FiltroAtual
+            onChange={(event) => setFiltroAtual(event.target.value)}
+            tipoFiltro={tipoFiltro}
+            categorias={categorias}
+            estados={estados}
+          />
         </div>
       </div>
 
@@ -71,15 +85,23 @@ function Projects({ projects, categorias }) {
                 .trim()
                 .includes(pesquisa.toLowerCase().trim())
           )
-        
-          .filter(
-            (project) =>
-              tipoFiltro === "Categoria" ? project.categoria == filtroAtual : project
+
+          .filter((project) =>
+            tipoFiltro === "Categoria"
+              ? project.categoria == filtroAtual
+              : project
           )
-          
-          .filter(
-            (project) =>
-              filtroAtual === "Ativo" ? project.ativo : !project.ativo
+
+          .filter((project) =>
+            filtroAtual === "Ativo" && tipoFiltro === "Ativo/desativo"
+              ? project.ativo
+              : project
+          )
+
+          .filter((project) =>
+            filtroAtual === "Desativo" && tipoFiltro === "Ativo/desativo"
+              ? !project.ativo
+              : project
           )
 
           .map((project) => (
@@ -87,17 +109,18 @@ function Projects({ projects, categorias }) {
               key={project.id}
               className="flex w-[880px] h-[80px] px-[40px] bg-white drop-shadow-xl items-center mt-[20px] mb-[30px] justify-between"
             >
-              <div className="flex justify-center gap-15 items-center">
+              <div className="flex justify-center gap-15 items-center overflow-x-auto">
                 <p className="font-bold text-[25px]">{project.nome}</p>
                 <p className="text-[20px]"> 0 tarefas </p>
-                <p
-                  className={`text-[20px] ${
+                <button
+                  className={`text-[20px] cursor-pointer duration-500 ${
                     project.ativo ? "text-verde-ativo" : "text-red-600"
                   }`}
+                  onClick={() => onEstadoClick(project.id)}
                 >
                   {" "}
                   {project.ativo ? "Ativo" : "Pendente"}{" "}
-                </p>
+                </button>
                 <p className="text-[20px]"> {project.categoria} </p>
               </div>
               <button

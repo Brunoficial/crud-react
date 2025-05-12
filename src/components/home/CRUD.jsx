@@ -1,7 +1,7 @@
-import caneta from "../assets/icons/caneta.svg"
-import marcaPagina from "../assets/icons/marcapagina.svg"
-import setaBaixo from "../assets/icons/seta_baixo.svg"
-import lixeira from "../assets/icons/lixeira.svg"
+import caneta from "../../assets/icons/caneta.svg"
+import marcaPagina from "../../assets/icons/marcapagina.svg"
+import setaBaixo from "../../assets/icons/seta_baixo.svg"
+import lixeira from "../../assets/icons/lixeira.svg"
 import Letras from "./Letras"
 import Explicacao from "./Explicacao"
 

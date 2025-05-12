@@ -2,6 +2,7 @@ import Header from "../components/Header.jsx";
 import AddProject from "../components/AddProject.jsx";
 import Projects from "../components/Projects.jsx";
 import { useState, useEffect } from "react";
+import Footer from "../components/footer/Footer.jsx"
 
 function Projetos() {
   const [projects, setProjects] = useState(
@@ -13,7 +14,7 @@ function Projetos() {
     console.log("Projetos foi alterado");
   }, [projects]);
 
-  const [categorias, setCategorias] = useState(["Categoria 1", "Categoria 2"]);
+  const categorias= ["Categoria 1", "Categoria 2"];
 
   function onAddProject(nome, categoria) {
     const newProject = {
@@ -25,6 +26,18 @@ function Projetos() {
     setProjects([...projects, newProject]);
   }
 
+  function onEstadoClick(projetoID) {
+    const projetos = projects.map((project) => {
+      if (project.id == projetoID) {
+         return {...project, ativo: !project.ativo}
+      }
+
+      return project;
+    })
+    setProjects(projetos);
+  }
+
+
   return (
     <div>
       <Header />
@@ -32,8 +45,9 @@ function Projetos() {
       <Projects
         projects={projects}
         categorias={categorias}
-        onAddProject={onAddProject}
+        onEstadoClick={onEstadoClick}
       />
+      <Footer />
     </div>
   );
 }
