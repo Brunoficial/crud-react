@@ -7,8 +7,7 @@ import Explicacao from "./Explicacao"
 
 function CRUD() {
     return (
-        <div className="flex gap-[100px] text-center justify-center mb-25">
-
+        <div className="flex gap-[100px] text-center justify-center mb-80">
             <div className="flex flex-col items-center justify-center">
                 <Letras>C</Letras>
                 <Explicacao>Criar</Explicacao>

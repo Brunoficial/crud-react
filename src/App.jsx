@@ -6,7 +6,7 @@ import Footer from './components//footer/Footer.jsx'
 
 function App() {
   return (
-    <div>
+    <div className='bg-body'>
       <Header />
       <Propaganda />
       <CRUD />

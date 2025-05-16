@@ -1,27 +1,29 @@
 import Header from "../components/Header.jsx";
-import AddProject from "../components/AddProject.jsx";
-import Projects from "../components/Projects.jsx";
+import AddProject from "../components/projetos/AddProject.jsx";
+import Projects from "../components/projetos/Projects.jsx";
 import { useState, useEffect } from "react";
 import Footer from "../components/footer/Footer.jsx"
+import {v4 as uuidv4} from 'uuid'
 
-function Projetos() {
+function ProjetosPagina() {
+
   const [projects, setProjects] = useState(
     JSON.parse(localStorage.getItem("projects"))
   );
 
   useEffect(() => {
     localStorage.setItem("projects", JSON.stringify(projects));
-    console.log("Projetos foi alterado");
   }, [projects]);
 
   const categorias= ["Categoria 1", "Categoria 2"];
 
-  function onAddProject(nome, categoria) {
+  function onAddProject(nome, categoria, descricao) {
     const newProject = {
-      id: projects.length + 1,
+      id: uuidv4(),
       nome,
       categoria,
       ativo: true,
+      descricao,
     };
     setProjects([...projects, newProject]);
   }
@@ -39,7 +41,7 @@ function Projetos() {
 
 
   return (
-    <div>
+    <div className="bg-body">
       <Header />
       <AddProject onAddProject={onAddProject} categorias={categorias} />
       <Projects
@@ -52,4 +54,4 @@ function Projetos() {
   );
 }
 
-export default Projetos;
+export default ProjetosPagina;

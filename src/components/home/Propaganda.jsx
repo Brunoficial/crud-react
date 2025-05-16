@@ -3,7 +3,7 @@ function Propaganda() {
         <div className="flex flex-col items-center justify-center mb-[100px]">
             <div className="flex flex-col text-[48px] font-bold text-cinza-destaque mb-[18px] items-center justify-center"> 
                 <span className="flex cursor-default">
-                    <span className="text-laranja hover:text-red-500 duration-500">
+                    <span className="text-laranja">
                         Bruno Crud
                     </span>
                     , o melhor,

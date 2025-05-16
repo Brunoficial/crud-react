@@ -4,6 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
+    --color-body: #F7F7F7;
     --color-laranja: #D58120;
     --color-cinza: #7E7E7E;
     --color-cinza-destaque: #484747;
