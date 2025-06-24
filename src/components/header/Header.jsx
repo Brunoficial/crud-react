@@ -1,5 +1,5 @@
 import BotaoHeader from "./BotaoHeader";
-import user from "../assets/icons/user.svg";
+import user from "../../assets/icons/user.svg";
 import { useNavigate, useLocation } from "react-router-dom";
 
 function Header() {
@@ -18,7 +18,7 @@ function Header() {
             <p className="text-[32px] font-bold cursor-default  text-laranja">BRUNO CRUD</p>
             <div className="flex gap-[50px]">
                 <BotaoHeader 
-                    id=""
+                    id="home"
                     onClick = { onHeaderButtonClick }
                     className = {rotaAtual === "" ? 'font-bold' : '' } 
                     >
@@ -34,6 +34,8 @@ function Header() {
                 </BotaoHeader>
 
                 <BotaoHeader
+                    id="categorias"
+                    onClick = { onHeaderButtonClick }
                     className = {rotaAtual === "categorias" ? 'font-bold' : '' } 
                 >
                     Categorias

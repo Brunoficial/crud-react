@@ -1,12 +1,12 @@
-import Titulo from "../Titulo.jsx";
-import Input from "../Input.jsx";
+import Titulo from "../geral/Titulo.jsx";
+import Input from "../geral/Input.jsx";
 import adicionar_branco from "../../assets/icons/adicionar_branco.svg";
 import { useState } from "react";
 import { toast, Toaster } from "sonner";
 
 function AddProject({ onAddProject, categorias }) {
   const [nome, setNome] = useState("");
-  const [categoria, setCategoria] = useState("");
+  const [categoriaSelecionada, setCategoriaSelecionada] = useState("");
   const [descricao, setDescricao] = useState("");
 
   return (
@@ -29,12 +29,12 @@ function AddProject({ onAddProject, categorias }) {
         <select
           name="Categorias"
           id=""
-          onChange={(event) => setCategoria(event.target.value)}
+          onChange={(event) => setCategoriaSelecionada(event.target.value)}
           className="flex  border-[1px] rounded-[4px] border-cinza w-[300px] h-[40px] px-2"
         >
           <option value=""> Nenhuma Categoria </option>
-          {categorias.map((categoriaNome) => (
-            <option value={categoriaNome}> {categoriaNome} </option>
+          {categorias.map((categoria) => (
+            <option value={categoria.nome}> {categoria.nome} </option>
           ))}
         </select>
 
@@ -49,11 +49,11 @@ function AddProject({ onAddProject, categorias }) {
         <button
           onClick={() => {
             if (!nome.trim()) return alert("Dê um nome ao projeto!!!");
-            onAddProject(nome, categoria, descricao);
+            onAddProject(nome, categoriaSelecionada, descricao);
             console.log(nome);
-            console.log(categoria);
+            console.log(categoriaSelecionada);
             setNome("");
-            setCategoria("");
+            setCategoriaSelecionada("");
             setDescricao("");
             toast.success("Projeto criado com sucesso");
           }}

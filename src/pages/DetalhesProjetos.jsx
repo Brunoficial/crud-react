@@ -1,6 +1,9 @@
+// Bibls
 import { useState, useEffect } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
-import Titulo from "../components/Titulo.jsx";
+
+// Imagens 
+import Titulo from "../components/geral/Titulo.jsx";
 import lixeiraGoogle from "../assets/icons/lixeiraGoogle.svg";
 import setaEsquerda from "../assets/icons/setaEsquerda.svg";
 
@@ -22,8 +25,8 @@ function DetalhesProjetos() {
   function DeletarProjeto(projetoID) {
     const novosProjetos = projects.filter((project) => projetoID != project.id);
     setProjects(novosProjetos);
-
-    navigate(-1);
+    
+    navigate('/projetos');
   }
 
   function Voltar() {

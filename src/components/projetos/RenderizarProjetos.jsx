@@ -5,6 +5,9 @@ import React from "react";
 import setaBaixoBranca from "../../assets/icons/seta_baixo_branca.svg";
 import circuloLaranja from "../../assets/icons/circulo_laranja.svg";
 
+// Componentes
+import Projeto from "./ProjetoModelo.jsx";
+
 export default function RenderizarProjetos({
   projects,
   filtroCategoria,
@@ -15,7 +18,7 @@ export default function RenderizarProjetos({
 }) {
   if (projects.length > 0)
     return (
-      <ul className="h-[460px]  overflow-y-auto ">
+      <ul className="h-[460px] overflow-y-auto">
         {projects
           .filter(
             (project) =>
@@ -33,7 +36,7 @@ export default function RenderizarProjetos({
           )
 
           .sort((a, b) =>
-            ordemAlfabetica == true ? a.nome.localeCompare(b.nome) : ""
+            ordemAlfabetica == true ? a.nome.localeCompare(b.nome) : b.nome.localeCompare(a.nome)
           )
 
           .map((project) => (
@@ -68,5 +71,10 @@ export default function RenderizarProjetos({
           ))}
       </ul>
     );
-  else return (<p className="flex font-bold justify-center py-4">Nenhum projeto encontrado :( </p>)
+  else
+    return (
+      <p className="flex font-bold justify-center py-4">
+        Nenhum projeto encontrado :({" "}
+      </p>
+    );
 }

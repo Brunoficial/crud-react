@@ -1,9 +1,10 @@
-import Header from "../components/Header.jsx";
+import Header from "../components/header/Header.jsx";
 import AddProject from "../components/projetos/AddProject.jsx";
 import Projects from "../components/projetos/Projects.jsx";
 import { useState, useEffect } from "react";
 import Footer from "../components/footer/Footer.jsx"
 import {v4 as uuidv4} from 'uuid'
+import { Icons } from "../assets/icons/index.jsx";
 
 function ProjetosPagina() {
 
@@ -15,7 +16,9 @@ function ProjetosPagina() {
     localStorage.setItem("projects", JSON.stringify(projects));
   }, [projects]);
 
-  const categorias= ["Categoria 1", "Categoria 2"];
+  const categorias = (
+        JSON.parse(localStorage.getItem("categorias"))
+      );
 
   function onAddProject(nome, categoria, descricao) {
     const newProject = {
@@ -40,6 +43,7 @@ function ProjetosPagina() {
   }
 
 
+
   return (
     <div className="bg-body">
       <Header />
@@ -49,6 +53,7 @@ function ProjetosPagina() {
         categorias={categorias}
         onEstadoClick={onEstadoClick}
       />
+    
       <Footer />
     </div>
   );
